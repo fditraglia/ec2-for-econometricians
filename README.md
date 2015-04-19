@@ -105,6 +105,9 @@ Accessing Your Instance
 In the preceding section we launched a Linux instance.
 To actually do anything with our instance we'll need to connect to it and this will require using some command line tools.
 If you've never worked with a UNIX-like terminal before, you may find it helpful to brush up on a couple of basics.
+The game [Terminus](http://web.mit.edu/mprat/Public/web/Terminus/Web/main.html) is a fun, browser-based introduction to the command line, somewhat in the style of Oregon Trail.
+William Schott's book [The Linux Command Line](http://linuxcommand.org/tlcl.php) is also fantastic and free!
+
 
 The most reliable way to acces your instance is by using an ssh client.
 If you're running Mac or Linux, you already have one installed that you can run from a terminal window.
@@ -120,6 +123,11 @@ This program comes highly recommended to me, but I've never used it before.
 One twist if you choose this option is that you'll have to convert your key to a formal that PuTTY can understand.
 Full instructions are available [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html).
 
+For the rest of this section I'll assume that you're on Mac or Linux.
+If you're on Windows you'll have to adapt these instructions slightly following the information at the links given above.
+
+1. Open a terminal. If you're on Linux I'll assume you know how to do this. If you're on Mac, go to spotlight and type "Terminal" before pressing return. You should see a black window with a command prompt.
+2. In this step we'll move the key you created above to the "hidden" ``.ssh`` directory to keep it safe from prying eyes. My key is called ``my-key.pem`` and is currently on my desktop. I move it to the appropriate directory as follows: 
 
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
