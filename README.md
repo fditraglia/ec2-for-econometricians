@@ -231,10 +231,36 @@ A stopped instance can be re-started right where you left off, but your only cha
 Here's how to set the alarm for an instance that you already have running:
 
 1. Go to the EC2 control panel, click **Instances** and select the instance you want. Then click **Actions** followed by **CloudWatch Monitoring** and **Add/Edit Alarms**.
-2. A dialog box will pop up. Click **Create Alarm** and fill out the details. I suggest "Whenever Maximum of CPU Utilization Is less than 10 percent for at least 1 consecutive period(s) of 5 minutes."
+2. A dialog box will pop up. Click **Create Alarm** and fill out the details. I suggest "Whenever Average of CPU Utilization Is less than 10 percent for at least 1 consecutive period(s) of 5 minutes."
+3. Check the option "Take the action:" and select "Stop"
+4. Click **Create Alarm""
+
+Form more information, see the [AWS Documentation](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/UsingAlarmActions.html).
 
 Using a Terminal Multiplexer (tmux)
 ------------------------------------
+You've accessed your instance via ssh and are running a lengthly calculation.
+Just then the Wi-fi network you're working from starts behaving strangely and your ssh connection cuts out.
+You re-connect to your instance and are surprised to find that your simulation has stopped running!
+What gives?!
+
+When connected via ssh to a remote machine, any processes that haven't finished running when your connection cuts out will be *terminated*. 
+The machine is still sitting there, waiting to do your bidding, but anything that hadn't finished running will be lost.
+This is far from ideal, but fortunately there's a solution: tmux.
+Now let's try a little example.
+
+First launch and connect to a t2.micro instance.
+If the AMI you're using doesn't already have R and git, install them first: 
+
+        sudo apt-get update
+        sudo apt-get install -y r-base
+        sudo apt-get install git
+Then clone *this repository* as follows:
+
+        git clone https://github.com/fditraglia/ec2-for-econometricians.git
+
+
+To learn more about tmux, try [this reference](https://danielmiessler.com/study/tmux/) and the [official documentation](http://tmux.sourceforge.net).
 
 Elastic Block Storage
 ----------------------
