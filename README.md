@@ -181,7 +181,7 @@ Once it's up and running and you know its Public IP, you can connect to it as fo
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
 
-1. Launch a t2.micro using a public AMI. I'll use Ubuntu Server 14.04 LTS.
+1. Launch a t2.micro instance using Amazon's Ubuntu Server 14.04 LTS AMI as above.
 2. Log into the instance and install whatever software you want. I'll install R, Rcpp, RcppArmadillo and git as follows:
 
         sudo apt-get update
