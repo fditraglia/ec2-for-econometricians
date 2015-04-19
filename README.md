@@ -63,7 +63,7 @@ It may take a few seconds to generate the key.
 For the moment save it somewhere easily accessible, like your desktop.
 *Don't lose the key or you won't be able to access your instance and will have to start all over again!*
 After you've set up a key pair, you'll be able to re-use it in the future.
-6. Click **Launch Instances** followed by **View Instances**. You should see a t2.micro instance listed with Instance State "pending." After a short time this will switch to "running." When this happens, your instance is ready to go. 
+6. Check the box marked "I acknowledge that..." and then click **Launch Instances** followed by **View Instances**. You should see a t2.micro instance listed with Instance State "pending." After a short time this will switch to "running." When this happens, your instance is ready to go. 
 
 So what just happened?
 When you want to start an instance you need to do three things: choose an AMI, choose an instance type, and set up security.
@@ -100,8 +100,8 @@ The point is to ensure that you and only you can access the instance you've crea
 This is precisely what creating a keypair does.
 In the next section I'll show you how to use your key to access your instance via ssh.
 
-Accessing Your Instance
------------------------
+Accessing Your Instance For the First Time
+-------------------------------------------
 In the preceding section we launched a Linux instance.
 To actually do anything with our instance we'll need to connect to it and this will require using some command line tools.
 If you've never worked with a UNIX-like terminal before, you may find it helpful to brush up on a couple of basics.
@@ -147,20 +147,36 @@ This is the *unique* address that you will use to access your instance.
 Every time you create a new instance you should expect it to have a *different* Public IP. 
 Using your Public IP, you can access your machine via ssh as follows:
 
-        ```
         ssh -i ~/.ssh/my-key.pem ubuntu@PublicIP
-        ```
 where ``PublicIP`` is the public IP address of your instance.
 After hitting return, you may be asked whether you want to trust this connection.
 Enter yes.
 A few seconds later your command prompt should change so it starts with ``ubuntu@``. 
 You are now connected via ssh to your machine!
 
+Your instance is pretty much empty except for basic command line tools.
+If you type ``ls`` to list all the files in your home directory it won't list anything since there's nothing to list!
+Let's remedy this by installing R so we can do a simple calculation:
+
+        sudo apt-get update
+        sudo apt-get install -y r-base
+Text will flash across the screen for a while but after a minute or so you'll be back to your command prompt.
+If you enter ``R`` you'll launch an R terminal session. 
+To quit enter ``q()`` and choose ``n``.
+To disconnect from your instance type ``exit`` at the Linux command prompt.
+Your command prompt should change as you're now connected to your local machine rather than the instance.
+Finally, go to the EC2 control panel, click **Instances**, click on your instance and then click **Actions** followed by **Instance State** and then **Terminate**.
+Amazon will ask if you're sure: once you terminate an instance, everything on it will be deleted.
+This is unlike *stopping* an instance, which we'll discuss below.
 
 Starting Up Your *Second* Instance
 -----------------------------------
 The next time you want to launch and connect to an instance, you can re-use the key you've already created, thus skipping several steps.
-All you'll need to do is:
+After you've selected an AMI and instance type you'll be given the option to "Choose an existing key pair."
+This time there's nothing to download: you can simply launch the instance.
+Once it's up and running and you know its Public IP, you can connect to it as follows:
+
+        ssh -i ~/.ssh/my-key.pem ubuntu@PublicIP
 
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
