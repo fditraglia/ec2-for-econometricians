@@ -100,6 +100,27 @@ The point is to ensure that you and only you can access the instance you've crea
 This is precisely what creating a keypair does.
 In the next section I'll show you how to use your key to access your instance via ssh.
 
+Accessing Your Instance
+-----------------------
+In the preceding section we launched a Linux instance.
+To actually do anything with our instance we'll need to connect to it and this will require using some command line tools.
+If you've never worked with a UNIX-like terminal before, you may find it helpful to brush up on a couple of basics.
+
+The most reliable way to acces your instance is by using an ssh client.
+If you're running Mac or Linux, you already have one installed that you can run from a terminal window.
+I'll explain how to do this below.
+If you're on Windows, life is a bit more complicated.
+Essentially you have two options.
+The first is to connect to your instance using your browser.
+I've never tried this before, but supposedly if you have Java installed you can select your instance from the EC2 control panel and click the button marked **Connect**.
+This will run a terminal emulator in your browser that will ask for the location of the key you created above.
+For more details, click [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html#using-browser).
+Another option for Windows folks is to use a program called [PuTTY](http://www.putty.org), a free SSH and telnet client.
+This program comes highly recommended to me, but I've never used it before.
+One twist if you choose this option is that you'll have to convert your key to a formal that PuTTY can understand.
+Full instructions are available [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html).
+
+
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
 Here I'm assuming that you'll create an EBS-backed image, i.e. that you'll use an EBS-backed instance.
