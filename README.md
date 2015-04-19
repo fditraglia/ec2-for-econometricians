@@ -64,6 +64,7 @@ All of the compute-optimized instances are EBS-backed as are the smaller general
 Once you have an AMI, you can keep it around as long as you like, or delete it. 
 If you follow my instructions from above, you'll end up with an 8GB instance for which Amazon will charge you (at the time of this writing) 80 cents per month as long as you keep it hanging around.
 To *delete* an AMI that you've created and no longer need, follow these steps:
+
 1. Choose AMIs from the control panel and then click on the AMI you want to delete.
 2. Click **Actions** and then **Deregister** followed by **Continue**. The AMI will disappear from the list.
 3. Click on **Snapshots** from the control panel and select the snapshot whose name matches the AMI you just de-registered. Finally click **Actions** followed by **Delete**.
