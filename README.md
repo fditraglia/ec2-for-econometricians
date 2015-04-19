@@ -180,8 +180,6 @@ Once it's up and running and you know its Public IP, you can connect to it as fo
 
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
-Here I'm assuming that you'll create an EBS-backed image, i.e. that you'll use an EBS-backed instance.
-All of the compute-optimized instances are EBS-backed as are the smaller general purpose instance and these are what make the most sense for our purposes.
 
 1. Launch a t2.micro using a public AMI. I'll use Ubuntu Server 14.04 LTS.
 2. Log into the instance and install whatever software you want. I'll install R, Rcpp, RcppArmadillo and git as follows:
@@ -215,12 +213,28 @@ Alarms and Alerts
 One slightly scary thing about AWS is that it is technically possible for you to spend an unlimited amount of money by mistake.
 If you do this, Amazon *will charge you* so it's best to take precautions to make sure this can't happen.
 I recommend two layers of safety.
+
 First is a billing alert.
-You'll get an email if you've spent more than a certain amount of money.
-I set mine to notify me if I ever spend more than ten dollars.
+If you set up a billing alert, you'll get an email whenever your AWS bill goes above a pre-specified amount, e.g. 10 dollars.
+This is a *global* alert that applies to anything you might be spending money on: instances, storage of AMIs, etc.
+
 Second is an alarm that automatically stops idle instances.
-Amazon [doesn't charge](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html) you for stopped instances: they only charge you for storage on any attached EBS volumes (see below).
+When you stop an instance, Amazon [doesn't charge](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html) you for stopped instances.
+They only charge for storing the contents of the that instance on EBS, which is extremely inexpensive (see below).
 Instances could easily cost over a dollar per hour, but EBS volumes are around ten cents per GB per month.
+Unlike billing alerts, alarms are *instance-specific*. In other words, you need to set them up for each instance on which you want to use them.
+
+I suggest that whenever you start an instance, you set an alarm that automatically stops the instance whenever its CPU usage falls below 10% for more than 5 minutes.
+Doing this has two advantages: first is prevents you from accidentally leaving an expensive instance running when you're not using it, and second it can be used as a way of automatically terminating your instance after you've finished your simulation experiment.
+Remember: stopping an instance is *different* from terminating one.
+A stopped instance can be re-started right where you left off, but your only charged for storage when it's not running.
+Here's how to set the alarm for an instance that you already have running:
+
+1. Go to the EC2 control panel, click **Instances** and select the instance you want. Then click **Actions** followed by **CloudWatch Monitoring** and **Add/Edit Alarms**.
+2. A dialog box will pop up. Click **Create Alarm** and fill out the details. I suggest "Whenever Maximum of CPU Utilization Is less than 10 percent for at least 1 consecutive period(s) of 5 minutes."
+
+Using a Terminal Multiplexer (tmux)
+------------------------------------
 
 Elastic Block Storage
 ----------------------
