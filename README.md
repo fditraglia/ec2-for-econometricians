@@ -43,6 +43,39 @@ For example, if you start an instance in the US West (Oregon) region and then sw
 The easiest way to avoid confusion is to choose a region and stick with it.
 The closest one to us at Penn is US East, so I suggest that you always work with this one.
 
+Launching Your First Instance
+-----------------------------
+Now that you have an AWS account, it's time to create your very first EC2 instance.
+
+1. Go to the EC2 control panel and click **Instances** followed by **Launch Instance**.
+2. You'll be taken to a page that says "Step 1: Choose an Amazon Machine Image (AMI)" with the "Quick Start" pane selected.
+Scroll down to "Ubuntu Server 14.04 LTS" (the fourth option) and click **Select**.
+3. You'll now be taken to "Step 2: Choose an Instance Type." 
+The first option "General purpose t2.micro" should already be selected.
+If it isn't, click on it, and then click "Review and Launch. 
+4. You'll now be taken to "Step 7: Review Instance Launch." 
+Click **Launch** at the bottom right-hand side of the screen.
+5. A dialog box will pop up instructing you to select an existing key pair or create a new one.
+If this is your first time using EC2 you'll need to create a new key pair.
+You should *never* proceed without a key pair.
+Choose "Create a new key pair" from the pull-down menu, enter a name for the key pair in the text field and click "Download Key."
+It may take a few seconds to generate the key.
+For the moment save it somewhere easily accessible, like your desktop.
+*Don't lose the key or you won't be able to access your instance and will have to start all over again!*
+After you've set up a key pair, you'll be able to re-use it in the future.
+6. Click **Launch Instances** followed by **View Instances**. You should see a t2.micro instance listed with Instance State "pending." After a short time this will switch to "running." Once the field "Status Checks" changes from "Initializing" to "???", your instance it ready to use. 
+
+So what just happened?
+Without an AMI, an instance is just a bare machine with no software of any kind.
+An AMI includes an operating system and various other pieces of software to allow you to actually *use* an instance.
+Various AMIs are available but I suggest that you start with the Ubuntu Server 14.04 AMI provided by Amazon and then customize it to meet your needs, as described in the following section.
+Ubuntu is one of the most widely-used flavors of Linux so it's very easy to get help online if you run into problems.
+The second decision you'll need 
+
+An AMI is a bootable disk image, including an operating system, software and various files.
+When Amazon allocates an instance, this is just a bare machine with
+
+
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
 Here I'm assuming that you'll create an EBS-backed image, i.e. that you'll use an EBS-backed instance.
