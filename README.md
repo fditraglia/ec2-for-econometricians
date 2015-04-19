@@ -63,18 +63,42 @@ It may take a few seconds to generate the key.
 For the moment save it somewhere easily accessible, like your desktop.
 *Don't lose the key or you won't be able to access your instance and will have to start all over again!*
 After you've set up a key pair, you'll be able to re-use it in the future.
-6. Click **Launch Instances** followed by **View Instances**. You should see a t2.micro instance listed with Instance State "pending." After a short time this will switch to "running." Once the field "Status Checks" changes from "Initializing" to "???", your instance it ready to use. 
+6. Click **Launch Instances** followed by **View Instances**. You should see a t2.micro instance listed with Instance State "pending." After a short time this will switch to "running." When this happens, your instance is ready to go. 
 
 So what just happened?
+When you want to start an instance you need to do three things: choose an AMI, choose an instance type, and set up security.
+These are important concepts in their own right, so it's worth spending a little time understanding how they work.
+
+An AMI is an *Amazon Machine Image*.
 Without an AMI, an instance is just a bare machine with no software of any kind.
-An AMI includes an operating system and various other pieces of software to allow you to actually *use* an instance.
-Various AMIs are available but I suggest that you start with the Ubuntu Server 14.04 AMI provided by Amazon and then customize it to meet your needs, as described in the following section.
-Ubuntu is one of the most widely-used flavors of Linux so it's very easy to get help online if you run into problems.
-The second decision you'll need 
+To actually be able to *use* an instance, you'll need at least an operating system.
+Essentially an AMI is a bootable disk image containing and operating system and (possibly) other pieces of software that you might want to use.
+Various AMIs are available, both from Amazon and third parties, and you can even create your own.
+What we did above was select one of Amazon's default Linux AMIs (Ubuntu Server 14.04 LTS).
+Ubuntu is a good choice as it's arguably the most widely-used flavor of Linux, making it very easy to find help online.
+Ubuntu 14.04 is rock-solid and will be supported for the next four years: it's what I run at home.
+This AMI is pretty bare-bones: it doesn't have much more than the operating system and some basic tools.
+If we want to use R, for example, we'll need to install it.
+Don't worry: this isn't hard.
+In one of the sections that follows I'll show you how to use this AMI as a base upon which to build a custom AMI of your own.
 
-An AMI is a bootable disk image, including an operating system, software and various files.
-When Amazon allocates an instance, this is just a bare machine with
+The second thing we did was choose an instance type.
+Whereas an AMI specifies the *software* you want to make available, the instance type specifies the *hardware*.
+There are many possibilities here but for our purposes this is really a question of how many cores and how much RAM you need.
+A full description of instance types is available [here](https://aws.amazon.com/ec2/instance-types/).
+Unsurprisingly, more cores means a higher charge per hour but pricing is linear: one core for ten hours costs the same as ten cores for one hour.
+For this example I selected the puniest possible instance type the t2.micro General Purpose instance.
+This is the cheapest possible instance: at the time of this writing it costs about 1.3 cents per hour.
+For up-to-date pricing in the US East (N. Virgina) region, click [here](https://aws.amazon.com/ec2/pricing/).
+The t2.micro is ideal for learning how to use EC2.
+For computationally intensive work, however, you'll want access to faster processers, more cores and more RAM.
+The two families of instance type that make the most sense for us are the Compute Optimized C4 family (up to 36 cores and 60 GB of RAM) and possibly in some cases the G2 family of instances, which include up to 4 high-performance NVIDIA GPUs, each with 1536 CUDA cores and 4GB of video memory.
+As you might expect, these machines are much pricier, but you can often get a very good deal by using spot instances, as I'll describe in more detail below.
 
+The final step in setting up an instance is setting up security.
+The point is to ensure that you and only you can access the instance you've created.
+This is precisely what creating a keypair does.
+In the next section I'll show you how to use your key to access your instance via ssh.
 
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
