@@ -182,13 +182,15 @@ Creating a Amazon Machine Image (AMI)
 --------------------------------------
 
 1. Launch a t2.micro instance using Amazon's Ubuntu Server 14.04 LTS AMI as above.
-2. Log into the instance and install whatever software you want. I'll install R, Rcpp, RcppArmadillo and git as follows:
+2. Log into the instance and install whatever software you want. I'll install ``R``, ``Rcpp``, ``RcppArmadillo``, ``git``, ``tmux`` and ``htop`` as follows:
 
         sudo apt-get update
         sudo apt-get install -y git
         sudo apt-get install -y r-base
         sudo apt-get install -y r-cran-rcpp
         sudo apt-get install -y r-cran-rcpparmadillo
+        sudo apt-get install -y tmux
+        sudo apt-get install -y htop
 3. Go to **Instances** in the EC2 console, click the instance on which you've installed the software you want, then click **Actions** followed by **Image** and **Create Image**.
 4. Fill out the required information, giving a name and optionally a description to your instance before clicking **Create Image**. (*Don't* select **No reboot**.) When you do this, your ssh connection will be closed. Don't be alarmed: this is what's supposed to happen!
 5. Under **AMIs** in the navigation pane, you should now see that your AMI is *pending*. After a few minutes it will be *available*. Unless you want to use it for some other purpose, you can now terminate the instance you started in Step 1 from the control panel by clicking on the instance followed by *Actions*, *Instance State* and *Terminate*.
