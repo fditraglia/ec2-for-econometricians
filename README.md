@@ -37,6 +37,7 @@ Creating a Amazon Machine Image (AMI)
 --------------------------------------
 Here I'm assuming that you'll create an EBS-backed image, i.e. that you'll use an EBS-backed instance.
 All of the compute-optimized instances are EBS-backed as are the smaller general purpose instance and these are what make the most sense for our purposes.
+
 1. Launch a t2.micro using a public AMI. I'll use Ubuntu Server 14.04 LTS.
 2. Log into the instance and install whatever software you want. I'll install R, Rcpp, RcppArmadillo and git.
 3. Go to **Instances** in the EC2 console, click the instance on which you've installed the software you want, then click **Actions** followed by **Image** and **Create Image**.
