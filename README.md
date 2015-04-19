@@ -45,7 +45,7 @@ All of the compute-optimized instances are EBS-backed as are the smaller general
         sudo apt-get install -y git
         sudo apt-get install -y r-base
         sudo apt-get install -y r-cran-rcpp
-        sudo apt-get install -y r-cran-rcpp
+        sudo apt-get install -y r-cran-rcpparmadillo
 3. Go to **Instances** in the EC2 console, click the instance on which you've installed the software you want, then click **Actions** followed by **Image** and **Create Image**.
 4. Fill out the required information, giving a name and optionally a description to your instance before clicking **Create Image**. (*Don't* select **No reboot**.)
 5. Under **AMIs** in the navigation pane, you should now see that your AMI is *pending*. After a few minutes it will be *available*.
