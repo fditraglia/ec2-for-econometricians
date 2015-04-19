@@ -128,15 +128,18 @@ If you're on Windows you'll have to adapt these instructions slightly following 
 
 1. Open a terminal. If you're on Linux I'll assume you know how to do this. If you're on Mac, go to spotlight and type "Terminal" before pressing return. You should see a black window with a command prompt.
 2. In this step we'll move the key you created above to the "hidden" ``.ssh`` directory to keep it safe from prying eyes. My key is called ``my-key.pem`` and is currently on my desktop. I move it to the appropriate directory as follows: 
+
         ```
         mv ~/Desktop/my-key.pem ~/.ssh
         ```
 We can check that this worked by viewing the contents of the ``.ssh`` directory as follows:
+
         ```
         ls ~/.ssh
         ```
 On my machine after running this command I see, among other things, ``my-key.pem`` which I just moved to this directory.
 If you're using this particular key for the first time you'll also need to do the following:
+
         ```
         chmod 400 ~/.ssh/my-key.pem
         ```
@@ -149,6 +152,7 @@ For example it might be 12.3.4.55 or something similar.
 This is the *unique* address that you will use to access your instance.
 Every time you create a new instance you should expect it to have a *different* Public IP. 
 Using your Public IP, you can access your machine via ssh as follows:
+
         ```
         ssh -i ~/.ssh/my-key.pem ubuntu@PublicIP
         ```
