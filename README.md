@@ -129,20 +129,14 @@ If you're on Windows you'll have to adapt these instructions slightly following 
 1. Open a terminal. If you're on Linux I'll assume you know how to do this. If you're on Mac, go to spotlight and type "Terminal" before pressing return. You should see a black window with a command prompt.
 2. In this step we'll move the key you created above to the "hidden" ``.ssh`` directory to keep it safe from prying eyes. My key is called ``my-key.pem`` and is currently on my desktop. I move it to the appropriate directory as follows: 
 
-        ```
         mv ~/Desktop/my-key.pem ~/.ssh
-        ```
 We can check that this worked by viewing the contents of the ``.ssh`` directory as follows:
 
-        ```
         ls ~/.ssh
-        ```
 On my machine after running this command I see, among other things, ``my-key.pem`` which I just moved to this directory.
 If you're using this particular key for the first time you'll also need to do the following:
 
-        ```
         chmod 400 ~/.ssh/my-key.pem
-        ```
 where, instead of ``my-key.pem`` you should use whatever name you gave your key when you created it.
 4. Finally we're ready to connect to the instance!
 Go to the EC2 control panel, click **Instances** and then click on the instance you want. (At this point there should be only one and it should have a green light under instance state.)
