@@ -33,6 +33,16 @@ By default, when you terminate an instance *everything is deleted*.
 (As I'll discuss below, it is possible to override this behavior.)
 In contrast, a *stopped instance* can be re-started at will and you can pick up exactly where you left off without being charged for computational resources that you didn't use in between.
 
+A Word about Regions
+--------------------
+The EC2 control panel is *region-specific*. 
+In the top right-hand corner there's a dropdown menu to choose your region.
+Among the options are US East (N. Virginia), US West (Oregon) and various overseas locations.
+You can set up instances and AMIs in various regions but you'll only be able to view them after you've selected the region in which you created them.
+For example, if you start an instance in the US West (Oregon) region and then switch over to US East (N. Virginia), it won't appear under **Instances**. 
+The easiest way to avoid confusion is to choose a region and stick with it.
+The closest one to us at Penn is US East, so I suggest that you always work with this one.
+
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
 Here I'm assuming that you'll create an EBS-backed image, i.e. that you'll use an EBS-backed instance.
@@ -47,10 +57,18 @@ All of the compute-optimized instances are EBS-backed as are the smaller general
         sudo apt-get install -y r-cran-rcpp
         sudo apt-get install -y r-cran-rcpparmadillo
 3. Go to **Instances** in the EC2 console, click the instance on which you've installed the software you want, then click **Actions** followed by **Image** and **Create Image**.
-4. Fill out the required information, giving a name and optionally a description to your instance before clicking **Create Image**. (*Don't* select **No reboot**.)
-5. Under **AMIs** in the navigation pane, you should now see that your AMI is *pending*. After a few minutes it will be *available*.
-6. Once your AMI is available, you'll be able to boot it up on any instance you like: just click BLAH
-For more info see the [AWS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html)
+4. Fill out the required information, giving a name and optionally a description to your instance before clicking **Create Image**. (*Don't* select **No reboot**.) When you do this, your ssh connection will be closed. Don't be alarmed: this is what's supposed to happen!
+5. Under **AMIs** in the navigation pane, you should now see that your AMI is *pending*. After a few minutes it will be *available*. Unless you want to use it for some other purpose, you can now terminate the instance you started in Step 1 from the control panel by clicking on the instance followed by *Actions*, *Instance State* and *Terminate*.
+6. Once your AMI is available, you'll be able to boot it up on any instance you like: click **AMIs** then select the AMI you want and click **Launch**. You'll be taken immediately to Step 2 of the instance configuration process where you'll be able to choose the kind of instance on which you want to boot your AMI. Note that it *needn't* be a t2.micro instance even though this was the kind of instance we used to create the AMI. Notice that the name you gave your AMI will appear under *Instances*, *Description* when you've started your instance.
+
+Once you have an AMI, you can keep it around as long as you like, or delete it. 
+If you follow my instructions from above, you'll end up with an 8GB instance for which Amazon will charge you (at the time of this writing) 80 cents per month as long as you keep it hanging around.
+To *delete* an AMI that you've created and no longer need, follow these steps:
+1. Choose AMIs from the control panel and then click on the AMI you want to delete.
+2. Click **Actions** and then **Deregister** followed by **Continue**. The AMI will disappear from the list.
+3. Click on **Snapshots** from the control panel and select the snapshot whose name matches the AMI you just de-registered. Finally click **Actions** followed by **Delete**.
+Fractions of a month are billed hourly.
+For more information on creating AMIs, see the [AWS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html).
 
 
 
