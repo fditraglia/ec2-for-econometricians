@@ -318,6 +318,22 @@ After a short period time your instance will be up and running again *but with a
 Using this information you can log in via ssh using the same key that you set up before and you'll find the machine exactly as you left it.
 (The above assumes that you're using an EBS-backed instance. All of the compute optimized instances are EBS-backed as are the smaller general purpose instances. I suggest that you stick to these in any case.)
 
+Moving Files to and From your Instance
+---------------------------------------
+Various ways to do this.
+I prefer git.
+
+Basics of Parallel Simulations
+------------------------------
+Explain about mclapply and how to use tmux and htop to monitor the load on each core.
+Also talk about overhead, etc, and general principles of parallel computing.
+
+Doing More with StarCluster
+---------------------------
+
+Working with Spot Instances
+---------------------------
+
 Elastic Block Storage
 ----------------------
 If you create an instance and terminate it everything on that machine *will be deleted* **unless** you've set up persistent storage.
