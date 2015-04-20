@@ -269,8 +269,43 @@ For this example we'll use the script ``sleep_csv.R`` whose contents are as foll
         write.csv(out, file = 'results.csv')
 All this script does is create a very simple dataframe, wait for thirty seconds, and then write it to the user's home directory.
 This is intended to mimic a simulation study or something similar that takes some time to finish running.
+We'll run this script in batch mode as follows:
 
-To learn more about tmux, try [this reference](https://danielmiessler.com/study/tmux/) and the [official documentation](http://tmux.sourceforge.net).
+        cd ec2-for-econometricians
+        R CMD BATCH sleep_csv.R 
+After thirty seconds, the script should finish running and a file called ``results.csv`` should appear in the home directory of your instance:
+
+        cd ..
+        ls
+        cat results.csv
+Now, let's try again. But this time we'll simulate our internet connection failing before the script has finished running by closing the terminal window before the script has time to finish running.
+First we'll remove the ``results.csv`` file that already exists before repeating the steps from above and running:
+
+        rm results.csv
+        cd ec2-for-econometricians
+        R CMD BATCH sleep_csv.R
+Now, before thirty seconds have elapsed, close the terminal window.
+After starting a new terminal and re-connecting to the machine, you will find that ``results.csv`` is nowhere to be seen.
+
+There are several ways to get around this problem, but the simplest and most powerful is to use tmux.
+First we'll install it as follows
+
+        sudo apt-get install -y tmux
+Now we'll repeat our "fake internet disconnect" experiment with one twist: before starting, enter the command ``tmux`` at the command line to start a tmux session.
+You'll notice a green bar at the bottom of your screen.
+This is to indicate that you're working from within tmux rather than in the shell in which you started.
+Now run the ``sleep_csv.R`` in batch mode again and then close the terminal window.
+Now reconnect and you'll find that ``results.csv`` is right where you expected it to be!
+Now if you type 
+
+        tmux attach
+You'll find yourself exactly where you left off when you closed your terminal window before!
+To exit tmux type ``exit``. You'll still be connected to your remote machine and will need a second ``exit`` to disconnect.
+
+
+There's much more to tmux than what I've covered here and it's well worth learning the basics.
+I suggest that you check out [this reference](https://danielmiessler.com/study/tmux/) to start.
+The [official documentation](http://tmux.sourceforge.net) may also help.
 
 Elastic Block Storage
 ----------------------
