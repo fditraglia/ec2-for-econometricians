@@ -307,6 +307,17 @@ There's much more to tmux than what I've covered here and it's well worth learni
 I suggest that you check out [this reference](https://danielmiessler.com/study/tmux/) to start.
 The [official documentation](http://tmux.sourceforge.net) may also help.
 
+Stopping and Starting and Instance
+----------------------------------
+When you stop an instance Amazon stops charging you for computational resources and instead only charges you for EBS storage.
+The rate at the time of this writing is about 10 cents per GB per month, billed hourly which is very cheap!
+This is a great way to pick up exactly where you left off on a project without being charged for computing time that you're not using.
+To restart a stopped instance, go to the EC2 control panel and click **Instances**.
+Then click on the instance you want to re-start and choose **Actions** followed by **Instance State** and then **Start**.
+After a short period time your instance will be up and running again *but with a new Public IP address*.
+Using this information you can log in via ssh using the same key that you set up before and you'll find the machine exactly as you left it.
+(The above assumes that you're using an EBS-backed instance. All of the compute optimized instances are EBS-backed as are the smaller general purpose instances. I suggest that you stick to these in any case.)
+
 Elastic Block Storage
 ----------------------
 If you create an instance and terminate it everything on that machine *will be deleted* **unless** you've set up persistent storage.
