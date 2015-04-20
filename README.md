@@ -256,11 +256,19 @@ If the AMI you're using doesn't already have R and git, install them first:
 
         sudo apt-get update
         sudo apt-get install -y r-base
-        sudo apt-get install git
+        sudo apt-get install -y git
 Then clone *this repository* as follows:
 
         git clone https://github.com/fditraglia/ec2-for-econometricians.git
+You'll now have a directory called ``ec2-for-econometricians`` containing, this document along with a few R source files.
+For this example we'll use the script ``sleep_csv.R`` whose contents are as follows:
 
+        out <- data.frame(1:10, 10:1)
+        Sys.sleep(30)
+        setwd("~/")
+        write.csv(out, file = 'results.csv')
+All this script does is create a very simple dataframe, wait for thirty seconds, and then write it to the user's home directory.
+This is intended to mimic a simulation study or something similar that takes some time to finish running.
 
 To learn more about tmux, try [this reference](https://danielmiessler.com/study/tmux/) and the [official documentation](http://tmux.sourceforge.net).
 
