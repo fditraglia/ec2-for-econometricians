@@ -209,11 +209,14 @@ Fractions of a month are billed hourly.
 For more information on creating AMIs, see the [AWS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html).
 
 
-Getting the Most Recent Version of R
+Setting up a Development Environment
 ------------------------------------
-To make sure that you have the most recent version of R you'll need to do a bit more work.
-Do this *before* running the steps in the previous section if you want to have the latest version of R.
-If you don't care, then just use the simpler instructions above without worrying about the following.
+The instructions above will not give you the most recent version of R but are simple to use.
+If you plan on developing and working with your own packages, however, you'll want to have not only the lastest version of R but the lastest versions of Rcpp and RcppArmadillo in addition to the ``devtools`` package.
+To set these up you need to follow a slightly more complicated procedure.
+(You can still install ``git`` as well as ``htop`` and ``tmux`` as above.)
+
+First you need to make sure that you install the latest version of R rather than the version that's in the Debian repository.
 More detailed instructions for what I'm about to describe are available [here](https://cran.r-project.org/bin/linux/ubuntu/README) but I'll provide an overview that works assuming that you're using version 14.04 of Ubuntu.
 First use a text editor to open the file ``/etc/apt/sources.list``. 
 You'll need to be the superuser to do this, for example you could run
@@ -230,7 +233,26 @@ Now you'll need to set up an APT-key, which you can do as follows:
 
         sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
-Now you're all set!
+Now you can install R as follows
+
+        sudo apt-get install r-base
+
+The next step is to install two system packages that will be used by ``devtools``
+
+        sudo apt-get install libxml2-dev
+        sudo apt-get install libcurl4-openssl-dev
+        
+After running these, open R by typing ``R`` at the terminal.
+Once inside R, install ``Rcpp,`` ``RcppArmadillo`` and ``devtools`` as follows
+
+        install.packages("Rcpp")
+        install.packages("RcppArmadillo")
+        install.packages("devtools")
+
+R will likely ask you if you want to create a private library. 
+Say yes.
+Then it will ask you to choose a mirror.
+It doesn't matter which you choose, but one that's physically closer to your location may be faster.
 
 
 Alarms and Alerts
