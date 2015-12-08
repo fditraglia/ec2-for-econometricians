@@ -180,6 +180,8 @@ Once it's up and running and you know its Public IP, you can connect to it as fo
 
 Creating a Amazon Machine Image (AMI)
 --------------------------------------
+Note that the following will *not* give you the absolute latest version of R.
+If you want to make sure that you have the most recent version, which could be important if you're trying to develop packages, see the *next* section before following these steps:
 
 1. Launch a t2.micro instance using Amazon's Ubuntu Server 14.04 LTS AMI as above.
 2. Log into the instance and install whatever software you want. I'll install ``R``, ``Rcpp``, ``RcppArmadillo``, ``git``, ``tmux`` and ``htop`` as follows:
@@ -207,7 +209,28 @@ Fractions of a month are billed hourly.
 For more information on creating AMIs, see the [AWS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html).
 
 
+Getting the Most Recent Version of R
+------------------------------------
+To make sure that you have the most recent version of R you'll need to do a bit more work.
+Do this *before* running the steps in the previous section if you want to have the latest version of R.
+If you don't care, then just use the simpler instructions above without worrying about the following.
+More detailed instructions for what I'm about to describe are available [here](https://cran.r-project.org/bin/linux/ubuntu/README) but I'll provide an overview that works assuming that you're using version 14.04 of Ubuntu.
+First use a text editor to open the file ``/etc/apt/sources.list``. 
+You'll need to be the superuser to do this, for example you could run
 
+        sudo vim /etc/apt/sources.list
+
+Then you'll need to add a CRAN mirror to the list.
+Add the following line to the text file you're editing:
+
+        deb http://cran.rstudio.com/bin/linux/ubuntu trusty/
+
+Then save the file and exit the text editor.
+Now you'll need to set up an APT-key, which you can do as follows:
+
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+
+Now you're all set!
 
 
 Alarms and Alerts
